@@ -46,6 +46,14 @@ const productSchema = new Schema<IProduct>(
         tags: {type: [String], default: ['new arrival']},
         colors: {type: [String], default: ['black', 'white', 'red', 'blue', 'rainbow', 'camo']},
         discType: {type: [String], default: ['putters', 'mid range', 'drivers']},
+        plastic: { type: String },
+        weight: { type: Number },
+        flightNumbers: {
+          speed: { type: Number },
+          glide: { type: Number },
+          turn: { type: Number },
+          fade: { type: Number },
+        },
         avgRating: {
             type: Number,
             required: true,

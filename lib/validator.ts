@@ -45,6 +45,14 @@ export const ProductInputSchema = z.object({
   sizes: z.array(z.string()).default([]),
   colors: z.array(z.string()).default([]),
   discType: z.array(z.string()).default([]),
+  plastic: z.string().optional(),
+  weight: z.coerce.number().int().min(100).max(200).optional(),
+  flightNumbers: z.object({
+    speed: z.number(),
+    glide: z.number(),
+    turn: z.number(),
+    fade: z.number(),
+  }).optional(),
   avgRating: z.coerce
     .number()
     .min(0, 'Average rating must be at least 0')

@@ -25,7 +25,7 @@ export function HomeCarousel({
     } []
 }) {
     const plugin= React.useRef(
-        Autoplay({ delay: 3000, stopOnInteraction: true})
+        Autoplay({ delay: 6000, stopOnInteraction: true})
     )
 
     return (
@@ -40,12 +40,12 @@ export function HomeCarousel({
                 {items.map((item) => (
                     <CarouselItem key={item.title}>
                         <Link href={item.url}>
-                            <div className='flex aspect-[16/6] items-center justify-center p-6 relative -m-1'>
+                            <div className='flex h-screen items-center justify-center relative'>
                                 <Image
                                   src={item.image}
                                   alt={item.title}
                                   fill
-                                  className='object-over'
+                                  className='object-cover'
                                   priority
                                   />
                                   <div className='absolute w-1/3 left-16 md:left-32 top-1/2 transform -translate-y-1/2'>
