@@ -21,7 +21,7 @@ export default async function ProductsPage() {
             color={product.colors?.[0]}
             discType={product.discType?.[0]}
             weight={product.weight}
-            material={product.plastic}
+            plastic={product.plastic}
             flightNumbers={product.flightNumbers}
           />
         ))}

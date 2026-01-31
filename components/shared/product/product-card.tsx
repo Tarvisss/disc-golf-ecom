@@ -24,11 +24,20 @@ type ProductCardProps = {
   image: string
   weight?: number
   color?: string
-  material?: string
+  plastic?: string
   discType?: string
   flightNumbers?: FlightNumbers
   className?: string
 }
+
+const animationOptions = ['zoomin-ur','zoomin-dl','zommin-dr','zommin-ul','zommin-u','zommin','zommin-r' ]
+
+function animate(arr: string[]){
+  const randomIndex = Math.floor(Math.random() * arr.length);
+  return arr[randomIndex]
+}
+
+
 
 export function ProductCard({
   name,
@@ -39,12 +48,13 @@ export function ProductCard({
   image,
   weight,
   color,
-  material,
+  plastic,
   discType,
   flightNumbers,
   className,
 }: ProductCardProps) {
   const hasDiscount = listPrice && listPrice > price
+  const animation = animate(animationOptions);
 
   return (
     <div
@@ -54,7 +64,7 @@ export function ProductCard({
       )}
     >
       <Link href={`/product/${slug}`} className="block">
-        <div className="relative aspect-square overflow-hidden">
+        <div data-usal={animation} className="relative aspect-square overflow-hidden">
           <Image
             src={image}
             alt={name}
@@ -82,8 +92,29 @@ export function ProductCard({
           )}
         </div>
 
+        {flightNumbers && (
+          <div className="grid grid-cols-4 gap-2 text-center mt-3">
+            <div>
+              <div className="text-lg font-bold">{flightNumbers.speed}</div>
+              <div className="text-xs text-muted-foreground">Speed</div>
+            </div>
+            <div>
+              <div className="text-lg font-bold">{flightNumbers.glide}</div>
+              <div className="text-xs text-muted-foreground">Glide</div>
+            </div>
+            <div>
+              <div className="text-lg font-bold">{flightNumbers.turn}</div>
+              <div className="text-xs text-muted-foreground">Turn</div>
+            </div>
+            <div>
+              <div className="text-lg font-bold">{flightNumbers.fade}</div>
+              <div className="text-xs text-muted-foreground">Fade</div>
+            </div>
+          </div>
+        )}
+
         <Accordion type="single" collapsible className="mt-4">
-          <AccordionItem value="description">
+          <AccordionItem value="description" className="border-b-0">
             <AccordionTrigger className="text-sm">Description</AccordionTrigger>
             <AccordionContent>
               <dl className="grid grid-cols-2 gap-2 text-sm">
@@ -95,6 +126,12 @@ export function ProductCard({
                   <>
                     <dt className="text-muted-foreground">Disc Type</dt>
                     <dd className="capitalize">{discType}</dd>
+                  </>
+                )}
+                {plastic && (
+                  <>
+                    <dt className="text-muted-foreground">Plastic</dt>
+                    <dd>{plastic}</dd>
                   </>
                 )}
                 {weight && (
@@ -110,59 +147,6 @@ export function ProductCard({
                   </>
                 )}
               </dl>
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="flight-numbers">
-            <AccordionTrigger className="text-sm">
-              Flight Numbers
-            </AccordionTrigger>
-            <AccordionContent>
-              {flightNumbers ? (
-                <div className="grid grid-cols-4 gap-2 text-center">
-                  <div>
-                    <div className="text-lg font-bold">
-                      {flightNumbers.speed}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Speed</div>
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold">
-                      {flightNumbers.glide}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Glide</div>
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold">
-                      {flightNumbers.turn}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Turn</div>
-                  </div>
-                  <div>
-                    <div className="text-lg font-bold">
-                      {flightNumbers.fade}
-                    </div>
-                    <div className="text-xs text-muted-foreground">Fade</div>
-                  </div>
-                </div>
-              ) : (
-                <p className="text-muted-foreground text-sm">
-                  Flight numbers not available
-                </p>
-              )}
-            </AccordionContent>
-          </AccordionItem>
-
-          <AccordionItem value="material" className="border-b-0">
-            <AccordionTrigger className="text-sm">Plastic</AccordionTrigger>
-            <AccordionContent>
-              {material ? (
-                <p>{material}</p>
-              ) : (
-                <p className="text-muted-foreground text-sm">
-                  Material information not available
-                </p>
-              )}
             </AccordionContent>
           </AccordionItem>
         </Accordion>
