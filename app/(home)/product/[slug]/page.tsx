@@ -3,6 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import data from "@/lib/data"
 import { Button } from "@/components/ui/button"
+import { Vortex } from "@/components/ui/vortex"
 import {
   Accordion,
   AccordionContent,
@@ -25,6 +26,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const hasDiscount = product.listPrice && product.listPrice > product.price
 
   return (
+    <Vortex className="relative min-h-screen">
     <div className="container mx-auto px-4 py-8">
       <Link
         href="/products"
@@ -36,7 +38,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mt-4">
         {/* Product Images */}
         <div className="space-y-4">
-          <div data-usal="flip-dr duration-1500" className="relative aspect-square overflow-hidden rounded-lg border">
+          <div data-usal="fade-u" className="relative aspect-square overflow-hidden rounded-full">
             <Image
               src={product.images[0]}
               alt={product.name}
@@ -50,7 +52,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {product.images.map((image, index) => (
                 <div
                   key={index}
-                  className="relative aspect-square overflow-hidden rounded-md border"
+                  className="relative aspect-square overflow-hidden rounded-full"
                 >
                   <Image
                     src={image}
@@ -203,5 +205,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </div>
     </div>
+    </Vortex>
   )
 }

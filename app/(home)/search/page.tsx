@@ -1,5 +1,6 @@
 import { ProductCard } from "@/components/shared/product/product-card"
 import data from "@/lib/data"
+import { Vortex } from "@/components/ui/vortex"
 
 type SearchPageProps = {
   searchParams: Promise<{
@@ -54,6 +55,7 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
   }
 
   return (
+    <Vortex className="relative min-h-screen">
     <div className="container mx-auto px-4 py-8">
       <h1 className="text-3xl font-bold mb-2">{pageTitle}</h1>
       <p className="text-muted-foreground mb-8">
@@ -88,5 +90,6 @@ export default async function SearchPage({ searchParams }: SearchPageProps) {
         </div>
       )}
     </div>
+    </Vortex>
   )
 }

@@ -731,22 +731,6 @@ const data: Data = {
       href: "/search?tag=best-seller"
     },
     {
-      name: "Distance Drivers",
-      href: "/search?category=Distance+Driver"
-    },
-    {
-      name: "Fairway Drivers",
-      href: "/search?category=Fairway+Driver"
-    },
-    {
-      name: "Midranges",
-      href: "/search?category=Midrange"
-    },
-    {
-      name: "Putters",
-      href: "/search?category=Putter"
-    },
-    {
       name: "Donate",
       href: "/search?category=Donate"
     },

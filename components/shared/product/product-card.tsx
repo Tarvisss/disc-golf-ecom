@@ -30,12 +30,12 @@ type ProductCardProps = {
   className?: string
 }
 
-const animationOptions = ['zoomin-ur','zoomin-dl','zommin-dr','zommin-ul','zommin-u','zommin','zommin-r' ]
+// const animationOptions = ['zoomin-ur duration 2000','zoomin-dl duration 2000','zommin-dr duration 2000','zommin-ul duration 2000','zommin-u duration 2000','zommin duration 2000','zommin-r duration 2000' ]
 
-function animate(arr: string[]){
-  const randomIndex = Math.floor(Math.random() * arr.length);
-  return arr[randomIndex]
-}
+// function animate(arr: string[]){
+//   const randomIndex = Math.floor(Math.random() * arr.length);
+//   return arr[randomIndex]
+// }
 
 
 
@@ -54,22 +54,22 @@ export function ProductCard({
   className,
 }: ProductCardProps) {
   const hasDiscount = listPrice && listPrice > price
-  const animation = animate(animationOptions);
+  // const animation = animate(animationOptions);
 
   return (
     <div
       className={cn(
-        "group rounded-lg border bg-card text-card-foreground shadow-sm overflow-hidden",
+        "group rounded-lg bg-card text-card-foreground shadow-sm overflow-hidden",
         className
       )}
     >
       <Link href={`/product/${slug}`} className="block">
-        <div data-usal={animation} className="relative aspect-square overflow-hidden">
+        <div data-usal="zoomin-d" className="relative aspect-[4/4] overflow-hidden">
           <Image
             src={image}
             alt={name}
             fill
-            className="object-cover transition-transform group-hover:scale-105"
+            className=" scale-75 relative aspect-square transition-transform group-hover:scale-95 rounded-full"
           />
         </div>
       </Link>
@@ -91,9 +91,10 @@ export function ProductCard({
             </span>
           )}
         </div>
-
+           <hr className="my-3" />
+        <div className="text-center text-sm text-muted-foreground mb-2" data-usal="zommin-u">Flight Numbers</div>
         {flightNumbers && (
-          <div className="grid grid-cols-4 gap-2 text-center mt-3">
+          <div className="grid grid-cols-4 gap-2 text-center mt-3" data-usal="zommin-u">
             <div>
               <div className="text-lg font-bold">{flightNumbers.speed}</div>
               <div className="text-xs text-muted-foreground">Speed</div>
