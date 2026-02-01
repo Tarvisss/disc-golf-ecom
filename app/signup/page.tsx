@@ -49,14 +49,30 @@ export default function SignUpPage() {
     setIsLoading(true)
 
     try {
-      // TODO: Add your registration API call here
-      // const response = await fetch("/api/auth/register", {
-      //   method: "POST",
-      //   headers: { "Content-Type": "application/json" },
-      //   body: JSON.stringify(formData),
-      // })
+      const response = await fetch("/api/auth/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          firstName: formData.firstName,
+          lastName: formData.lastName,
+          email: formData.email,
+          password: formData.password,
+          phone: formData.phone,
+          address: formData.address,
+          city: formData.city,
+          state: formData.state,
+          zipCode: formData.zipCode,
+        }),
+      })
 
-      // Placeholder success - redirect to signin
+      const data = await response.json()
+
+      if (!response.ok) {
+        setError(data.error || "Something went wrong")
+        return
+      }
+
+      // Success - redirect to signin
       router.push("/signin")
     } catch (err) {
       setError("Something went wrong. Please try again.")

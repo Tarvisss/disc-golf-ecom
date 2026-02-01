@@ -4,12 +4,6 @@ import { notFound } from "next/navigation"
 import data from "@/lib/data"
 import { Button } from "@/components/ui/button"
 import { Vortex } from "@/components/ui/vortex"
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/components/ui/accordion"
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>
@@ -30,7 +24,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <div className="container mx-auto px-4 py-8">
       <Link
         href="/products"
-        className="text-muted-foreground hover:text-foreground text-sm mb-6 inline-block"
+        className="text-input hover:text-foreground text-sm mb-6 inline-block"
       >
         &larr; Back to Products
       </Link>
@@ -68,67 +62,71 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Product Info */}
         <div className="space-y-6">
-          <div>
-            <p className="text-muted-foreground">{product.brand}</p>
-            <h1 className="text-3xl font-bold">{product.name}</h1>
-            {product.category && (
-              <p className="text-muted-foreground mt-1">{product.category}</p>
-            )}
-          </div>
-
-          {/* Price */}
-          <div className="flex items-center gap-3">
-            <span className="text-3xl font-bold">${product.price.toFixed(2)}</span>
-            {hasDiscount && (
-              <span className="text-xl text-muted-foreground line-through">
-                ${product.listPrice.toFixed(2)}
-              </span>
-            )}
-          </div>
-
-          {/* Rating */}
-          {product.avgRating && (
-            <div className="flex items-center gap-2">
-              <div className="flex">
-                {[1, 2, 3, 4, 5].map((star) => (
-                  <span
-                    key={star}
-                    className={
-                      star <= Math.round(product.avgRating)
-                        ? "text-yellow-500"
-                        : "text-gray-300"
-                    }
-                  >
-                    ★
-                  </span>
-                ))}
+          <div className="flex justify-between items-start gap-4">
+            {/* Left: Name & Price */}
+            <div className="space-y-2">
+              <div>
+                <h1 className="text-input text-3xl font-bold">{product.name}</h1>
+                {product.category && (
+                  <p className="text-input mt-1">{product.category}</p>
+                )}
               </div>
-              <span className="text-muted-foreground text-sm">
-                {product.avgRating} ({product.numReviews} reviews)
-              </span>
+
+              {/* Price */}
+              <div className="flex items-center gap-3">
+                <span className="text-3xl text-input font-bold">${product.price.toFixed(2)}</span>
+                {hasDiscount && (
+                  <span className="text-xl text-input line-through">
+                    ${product.listPrice.toFixed(2)}
+                  </span>
+                )}
+              </div>
             </div>
-          )}
+
+            {/* Right: Rating */}
+            {product.avgRating && (
+              <div className="flex flex-col items-center gap-1">
+                <div className="flex">
+                  {[1, 2, 3, 4, 5].map((star) => (
+                    <span
+                      key={star}
+                      className={
+                        star <= Math.round(product.avgRating)
+                          ? "text-yellow-500"
+                          : "text-gray-300"
+                      }
+                    >
+                      ★
+                    </span>
+                  ))}
+                </div>
+                <span className="text-input text-sm">
+                  {product.avgRating} ({product.numReviews} reviews)
+                </span>
+              </div>
+            )}
+          </div>
 
           {/* Flight Numbers */}
           {product.flightNumbers && (
-            <div className="bg-muted rounded-lg p-4">
-              <h3 className="font-semibold mb-3">Flight Numbers</h3>
+            <div className=" rounded-lg p-4">
+              <h3 className="font-semibold mb-3 text-input text-center">Flight Numbers</h3>
               <div className="grid grid-cols-4 gap-4 text-center">
                 <div>
-                  <div className="text-2xl font-bold">{product.flightNumbers.speed}</div>
-                  <div className="text-sm text-muted-foreground">Speed</div>
+                  <div className="text-2xl text-input font-bold">{product.flightNumbers.speed}</div>
+                  <div className="text-sm text-input">Speed</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">{product.flightNumbers.glide}</div>
-                  <div className="text-sm text-muted-foreground">Glide</div>
+                  <div className="text-2xl text-input font-bold">{product.flightNumbers.glide}</div>
+                  <div className="text-sm text-input">Glide</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">{product.flightNumbers.turn}</div>
-                  <div className="text-sm text-muted-foreground">Turn</div>
+                  <div className="text-2xl text-input font-bold">{product.flightNumbers.turn}</div>
+                  <div className="text-sm text-input">Turn</div>
                 </div>
                 <div>
-                  <div className="text-2xl font-bold">{product.flightNumbers.fade}</div>
-                  <div className="text-sm text-muted-foreground">Fade</div>
+                  <div className="text-2xl text-input font-bold">{product.flightNumbers.fade}</div>
+                  <div className="text-sm text-input">Fade</div>
                 </div>
               </div>
             </div>
@@ -152,56 +150,26 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
           {/* Description */}
           <div>
-            <h3 className="font-semibold mb-2">Description</h3>
-            <p className="text-muted-foreground">{product.description}</p>
+            <h3 className="font-semibold text-input mb-2">Description</h3>
+            <p className="text-input">{product.description}</p>
           </div>
-
-          {/* Product Details Accordion */}
-          <Accordion type="single" collapsible className="w-full">
-            <AccordionItem value="specs">
-              <AccordionTrigger>Specifications</AccordionTrigger>
-              <AccordionContent>
+          <hr/>
+          {/* Product Details*/}
+               <h3 className="font-semibold text-input mb-2">Specifcations</h3>            
                 <dl className="grid grid-cols-2 gap-2 text-sm">
-                  {product.plastic && (
                     <>
-                      <dt className="text-muted-foreground">Plastic</dt>
-                      <dd>{product.plastic}</dd>
+                      <dt className="text-input">Plastic</dt>
+                      <dd className="text-input">{product.plastic}</dd>
                     </>
-                  )}
-                  {product.weight && (
                     <>
-                      <dt className="text-muted-foreground">Weight</dt>
-                      <dd>{product.weight}g</dd>
+                      <dt className="text-input">Weight</dt>
+                      <dd className="text-input">{product.weight}g</dd>
                     </>
-                  )}
-                  {product.discType && product.discType.length > 0 && (
                     <>
-                      <dt className="text-muted-foreground">Disc Type</dt>
-                      <dd className="capitalize">{product.discType.join(", ")}</dd>
+                      <dt className="text-input">Disc Type</dt>
+                      <dd className="capitalize text-input">{product.discType.join(", ")}</dd>
                     </>
-                  )}
                 </dl>
-              </AccordionContent>
-            </AccordionItem>
-
-            {product.colors && product.colors.length > 0 && (
-              <AccordionItem value="colors">
-                <AccordionTrigger>Available Colors</AccordionTrigger>
-                <AccordionContent>
-                  <div className="flex flex-wrap gap-2">
-                    {product.colors.map((color) => (
-                      <span
-                        key={color}
-                        className="px-3 py-1 bg-muted rounded-full text-sm"
-                      >
-                        {color}
-                      </span>
-                    ))}
-                  </div>
-                </AccordionContent>
-              </AccordionItem>
-            )}
-          </Accordion>
         </div>
       </div>
     </div>

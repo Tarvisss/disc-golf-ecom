@@ -1,0 +1,5 @@
+MongoDB Creds:
+
+Password for DB access: AZRtL3AxOn7MwzRf
+
+user-name Db access: tsouther123_db_user

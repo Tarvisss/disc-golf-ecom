@@ -64,13 +64,15 @@ export function ProductCard({
       )}
     >
       <Link href={`/product/${slug}`} className="block">
-        <div data-usal="zoomin-d" className="relative aspect-[4/4] overflow-hidden">
-          <Image
-            src={image}
-            alt={name}
-            fill
-            className=" scale-75 relative aspect-square transition-transform group-hover:scale-95 rounded-full"
-          />
+        <div data-usal="zoomin-d" className="relative aspect-[4/3] overflow-hidden flex items-center justify-center">
+          <div className="relative w-3/4 aspect-square">
+            <Image
+              src={image}
+              alt={name}
+              fill
+              className="object-cover transition-transform group-hover:scale-105 rounded-full"
+            />
+          </div>
         </div>
       </Link>
 

@@ -45,7 +45,7 @@ export function Vortex({
 }: VortexProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const containerRef = useRef<HTMLDivElement>(null)
-  const animationRef = useRef<number>()
+  const animationRef = useRef<number>(null)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -62,7 +62,7 @@ export function Vortex({
     let tick = 0
     let width = 0
     let height = 0
-    let centerX = 0
+    let _centerX = 0
     let centerY = 0
 
     const baseTTL = 50
@@ -80,7 +80,7 @@ export function Vortex({
       height = window.innerHeight
       canvas.width = width
       canvas.height = height
-      centerX = width * 0.5
+      _centerX = width * 0.5
       centerY = height * 0.5
     }
 

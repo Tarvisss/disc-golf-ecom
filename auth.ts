@@ -10,19 +10,40 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         password: { label: "Password", type: "password" },
       },
       async authorize(credentials) {
-        // TODO: Add your own authentication logic here
-        // This is where you'd verify credentials against your database
         if (!credentials?.email || !credentials?.password) {
           return null
         }
 
-        // Placeholder - replace with actual database lookup
-        // const user = await db.user.findUnique({ where: { email: credentials.email } })
-        // if (user && await bcrypt.compare(credentials.password, user.password)) {
-        //   return user
-        // }
+        try {
+          // Dynamic imports to avoid Edge runtime issues
+          const { connectionToDatabase } = await import("@/lib/db/index")
+          const User = (await import("@/lib/db/models/user.model")).default
 
-        return null
+          await connectionToDatabase()
+
+          const user = await User.findOne({
+            email: (credentials.email as string).toLowerCase()
+          })
+
+          if (!user) {
+            return null
+          }
+
+          const isPasswordValid = await user.comparePassword(credentials.password as string)
+
+          if (!isPasswordValid) {
+            return null
+          }
+
+          return {
+            id: user._id.toString(),
+            email: user.email,
+            name: `${user.firstName} ${user.lastName}`,
+          }
+        } catch (error) {
+          console.error("Auth error:", error)
+          return null
+        }
       },
     }),
   ],
@@ -31,9 +52,15 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
     newUser: "/signup",
   },
   callbacks: {
+    async jwt({ token, user }) {
+      if (user) {
+        token.id = user.id
+      }
+      return token
+    },
     async session({ session, token }) {
-      if (token.sub) {
-        session.user.id = token.sub
+      if (token.id) {
+        session.user.id = token.id as string
       }
       return session
     },
