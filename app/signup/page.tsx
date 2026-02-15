@@ -46,6 +46,16 @@ export default function SignUpPage() {
       return
     }
 
+    if (!/[A-Z]/.test(formData.password)) {
+      setError("Password must contain at least one capital letter")
+      return
+    }
+
+    if (!/[!@#$%^&*(),.?":{}|<>]/.test(formData.password)) {
+      setError("Password must contain at least one special character")
+      return
+    }
+
     setIsLoading(true)
 
     try {
@@ -84,6 +94,7 @@ export default function SignUpPage() {
   return (
     <Vortex className="relative min-h-screen">
     <div className="min-h-screen flex items-center justify-center py-12 px-4">
+    <div className="w-full max-w-md space-y-8 bg-background/80 backdrop-blur-sm p-8 rounded-lg border">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold">Create an Account</h1>
@@ -226,7 +237,7 @@ export default function SignUpPage() {
               required
               value={formData.password}
               onChange={handleChange}
-              placeholder="At least 8 characters"
+              placeholder="Enter a strong password"
             />
           </div>
 
@@ -257,6 +268,7 @@ export default function SignUpPage() {
           </Link>
         </p>
       </div>
+    </div>
     </div>
     </Vortex>
   )

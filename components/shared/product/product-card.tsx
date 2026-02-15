@@ -64,7 +64,7 @@ export function ProductCard({
       )}
     >
       <Link href={`/product/${slug}`} className="block">
-        <div data-usal="zoomin-d" className="relative aspect-[4/3] overflow-hidden flex items-center justify-center">
+        <div data-usal="zoomin-d" className="relative aspect-[4/3] overflow-hidden flex items-center justify-center pt-4">
           <div className="relative w-3/4 aspect-square">
             <Image
               src={image}

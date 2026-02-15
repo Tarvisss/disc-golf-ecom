@@ -2,7 +2,7 @@ import Image from "next/image"
 import Link from "next/link"
 import { notFound } from "next/navigation"
 import data from "@/lib/data"
-import { Button } from "@/components/ui/button"
+import { AddToCartButton } from "@/components/shared/cart/add-to-cart-button"
 import { Vortex } from "@/components/ui/vortex"
 
 type ProductPageProps = {
@@ -144,9 +144,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
           </div>
 
           {/* Add to Cart Button */}
-          <Button size="lg" className="w-full" disabled={product.countInStock === 0}>
-            Add to Cart
-          </Button>
+          <AddToCartButton
+            className="w-full"
+            item={{
+              clientId: `${product.slug}-${product.colors?.[0] ?? 'default'}`,
+              product: product.slug,
+              name: product.name,
+              slug: product.slug,
+              category: product.category,
+              quantity: 1,
+              countInStock: product.countInStock,
+              image: product.images[0],
+              price: product.price,
+            }}
+          />
 
           {/* Description */}
           <div>
