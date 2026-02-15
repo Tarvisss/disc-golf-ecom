@@ -1,6 +1,6 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
 import { Vortex } from '@/components/ui/vortex'
@@ -19,6 +19,20 @@ interface OrderDetails {
 }
 
 export default function CheckoutSuccessPage() {
+  return (
+    <Suspense fallback={
+      <Vortex className="relative min-h-screen">
+        <div className="container mx-auto px-4 py-16 text-center">
+          <div className="text-lg text-input">Confirming your order...</div>
+        </div>
+      </Vortex>
+    }>
+      <SuccessContent />
+    </Suspense>
+  )
+}
+
+function SuccessContent() {
   const searchParams = useSearchParams()
   const sessionId = searchParams.get('session_id')
   const clearCart = useCartStore((s) => s.clearCart)
