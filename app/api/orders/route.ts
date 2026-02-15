@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import { stripe } from '@/lib/stripe'
+import { getStripe } from '@/lib/stripe'
 import { connectionToDatabase } from '@/lib/db/index'
 import Order from '@/lib/db/models/order.model'
 import Stripe from 'stripe'
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     }
 
     // Retrieve the Stripe session to verify payment
-    const session = await stripe.checkout.sessions.retrieve(sessionId)
+    const session = await getStripe().checkout.sessions.retrieve(sessionId)
 
     if (session.payment_status !== 'paid') {
       return NextResponse.json(
