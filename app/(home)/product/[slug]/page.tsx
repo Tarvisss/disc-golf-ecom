@@ -3,7 +3,7 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import data from "@/lib/data"
 import { AddToCartButton } from "@/components/shared/cart/add-to-cart-button"
-import { Vortex } from "@/components/ui/vortex"
+
 
 type ProductPageProps = {
   params: Promise<{ slug: string }>
@@ -20,7 +20,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
   const hasDiscount = product.listPrice && product.listPrice > product.price
 
   return (
-    <Vortex className="relative min-h-screen">
     <div className="container mx-auto px-4 py-8">
       <Link
         href="/products"
@@ -184,6 +183,5 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
       </div>
     </div>
-    </Vortex>
   )
 }

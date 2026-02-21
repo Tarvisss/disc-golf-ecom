@@ -3,6 +3,7 @@ import Footer from "@/components/footer";
 
 // Importing the Header component from the shared components folder
 import Header from "@/components/shared";
+import { Vortex } from "@/components/ui/vortex";
 
 // Exporting the HomeLayout component as the default export
 // This is an *async server component* in Next.js 13+ (using the App Router)
@@ -24,7 +25,8 @@ export default async function HomeLayout({
             {/* Main content area */}
             {/* - flex-1 → takes up all available vertical space between Header & Footer */}
             {/* - flex flex-col → allows children to stack vertically if needed */}
-            <main className="flex-1 flex flex-col">
+            <Vortex className="!-z-10" />
+            <main className="flex-1 flex flex-col relative z-10">
                 {children}
             </main>
 

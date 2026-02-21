@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { ProductCard } from "@/components/shared/product/product-card"
-import { Vortex } from "@/components/ui/vortex"
+
 import { Button } from "@/components/ui/button"
 import data from "@/lib/data"
 
@@ -20,7 +20,6 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
   const paginatedProducts = products.slice(startIndex, startIndex + PRODUCTS_PER_PAGE)
 
   return (
-    <Vortex key={currentPage} className="relative min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold mb-8">All Products</h1>
 
@@ -80,6 +79,5 @@ export default async function ProductsPage({ searchParams }: ProductsPageProps) 
           </div>
         )}
       </div>
-    </Vortex>
   )
 }

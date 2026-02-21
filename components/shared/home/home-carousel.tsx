@@ -40,7 +40,7 @@ export function HomeCarousel({
                 {items.map((item) => (
                     <CarouselItem key={item.title}>
                         <Link href={item.url}>
-                            <div className='flex h-screen items-center justify-center relative'>
+                            <div className='flex h-[50vh] items-center justify-center relative'>
                                 <Image
                                   src={item.image}
                                   alt={item.title}

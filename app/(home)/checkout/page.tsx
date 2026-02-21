@@ -3,7 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import Link from 'next/link'
-import { Vortex } from '@/components/ui/vortex'
+
 import { ShippingForm, ShippingFormData } from '@/components/shared/checkout/shipping-form'
 import { CartSummary } from '@/components/shared/cart/cart-summary'
 import { useCartStore } from '@/lib/store/cart-store'
@@ -54,19 +54,16 @@ export default function CheckoutPage() {
 
   if (items.length === 0) {
     return (
-      <Vortex className="relative min-h-screen">
         <div className="container mx-auto px-4 py-8 text-center space-y-4">
           <p className="text-input text-lg">Your cart is empty.</p>
           <Button asChild>
             <Link href="/products">Browse Products</Link>
           </Button>
         </div>
-      </Vortex>
     )
   }
 
   return (
-    <Vortex className="relative min-h-screen">
       <div className="container mx-auto px-4 py-8">
         <h1 className="text-3xl font-bold text-input mb-6">Checkout</h1>
 
@@ -87,6 +84,5 @@ export default function CheckoutPage() {
           </div>
         </div>
       </div>
-    </Vortex>
   )
 }

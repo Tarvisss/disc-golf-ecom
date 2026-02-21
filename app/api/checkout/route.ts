@@ -54,17 +54,26 @@ export async function POST(req: NextRequest) {
     // Calculate prices server-side (never trust client)
     const prices = calcPrices(items)
 
-    const lineItems = items.map((item) => ({
+    const origin = req.nextUrl.origin
+
+    const lineItems = items.map((item) => {
+      let images: string[] = []
+      if (item.image) {
+        // Stripe requires absolute URLs for images
+        images = [item.image.startsWith('http') ? item.image : `${origin}${item.image}`]
+      }
+      return {
       price_data: {
         currency: 'cad',
         product_data: {
           name: item.name,
-          images: item.image ? [item.image] : [],
+          images,
         },
         unit_amount: Math.round(item.price * 100), // Stripe uses cents
       },
       quantity: item.quantity,
-    }))
+    }
+    })
 
     // Add shipping as a line item if not free
     if (prices.shippingPrice > 0) {

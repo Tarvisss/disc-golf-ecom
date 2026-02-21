@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import Link from 'next/link'
-import { Vortex } from '@/components/ui/vortex'
+
 import { Button } from '@/components/ui/button'
 import { useCartStore } from '@/lib/store/cart-store'
 
@@ -21,11 +21,9 @@ interface OrderDetails {
 export default function CheckoutSuccessPage() {
   return (
     <Suspense fallback={
-      <Vortex className="relative min-h-screen">
         <div className="container mx-auto px-4 py-16 text-center">
           <div className="text-lg text-input">Confirming your order...</div>
         </div>
-      </Vortex>
     }>
       <SuccessContent />
     </Suspense>
@@ -78,7 +76,6 @@ function SuccessContent() {
   }, [sessionId])
 
   return (
-    <Vortex className="relative min-h-screen">
       <div className="container mx-auto px-4 py-16 text-center">
         {loading && (
           <div className="space-y-4">
@@ -133,6 +130,5 @@ function SuccessContent() {
           </div>
         )}
       </div>
-    </Vortex>
   )
 }
