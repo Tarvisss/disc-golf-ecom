@@ -5,7 +5,7 @@ import Link from "next/link"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Vortex } from "@/components/ui/vortex"
+
 
 export default function SignUpPage() {
   const router = useRouter()
@@ -92,8 +92,7 @@ export default function SignUpPage() {
   }
 
   return (
-    <Vortex className="relative min-h-screen">
-    <div className="min-h-screen flex items-center justify-center py-12 px-4">
+    <div className="flex items-center justify-center py-12 px-4">
     <div className="w-full max-w-md space-y-8 bg-background/80 backdrop-blur-sm p-8 rounded-lg border">
       <div className="w-full max-w-md space-y-8">
         <div className="text-center">
@@ -270,6 +269,5 @@ export default function SignUpPage() {
       </div>
     </div>
     </div>
-    </Vortex>
   )
 }

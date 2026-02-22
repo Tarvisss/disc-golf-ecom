@@ -732,29 +732,29 @@ const data: Data = {
     },
     {
       name: "Donate",
-      href: "/search?category=Donate"
+      href: "/donate"
     },
   ],
   carousels: [
     {
-      title: "Amazing Shot!",
-      buttonCaption: "Get Out There!",
+      title: "Premium Discs, Unbeatable Prices",
+      buttonCaption: "Shop All Discs",
       image: '/icons/images/New Project.png',
       url: '/products',
       isPublished: true,
     },
     {
-      title: "Your donations make a differance",
-      buttonCaption: "Donate Disc",
+      title: "Give Your Discs a Second Life",
+      buttonCaption: "Donate Now",
       image: '/icons/images/New Project2 (1).png',
-      url: '/search?tag=donate',
+      url: '/donate',
       isPublished: true,
     },
     {
-      title: "Shop New Arrivals",
-      buttonCaption: "Shop",
+      title: "Fresh Plastic Just Landed",
+      buttonCaption: "Shop New Arrivals",
       image: '/icons/images/New Project3.png',
-      url: '/search?category=new-arrivals',
+      url: '/search?tag=new-arrival',
       isPublished: true,
     }
   ]

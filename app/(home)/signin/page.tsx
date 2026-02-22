@@ -6,7 +6,7 @@ import { signIn } from "next-auth/react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
-import { Vortex } from "@/components/ui/vortex"
+
 
 export default function SignInPage() {
   const router = useRouter()
@@ -51,8 +51,7 @@ export default function SignInPage() {
   }
 
   return (
-    <Vortex>
-      <div className="min-h-screen flex items-center justify-center py-12 px-4">
+      <div className="flex items-center justify-center py-12 px-4">
         <div className="w-full max-w-md space-y-8 bg-background/80 backdrop-blur-sm p-8 rounded-lg border">
           <div className="text-center">
             <h1 className="text-3xl font-bold">Welcome Back</h1>
@@ -111,6 +110,5 @@ export default function SignInPage() {
           </p>
         </div>
       </div>
-    </Vortex>
   )
 }

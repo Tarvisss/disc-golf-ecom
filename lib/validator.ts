@@ -209,6 +209,19 @@ export const UserNameSchema = z.object({
   name: UserName,
 })
 
+// Donation
+export const DonationSchema = z.object({
+  donorName: z.string().min(1, 'Name is required'),
+  email: z.string().email('Valid email is required'),
+  phone: z.string().min(1, 'Phone number is required'),
+  discBrand: z.string().min(1, 'Disc brand is required'),
+  discModel: z.string().min(1, 'Disc model is required'),
+  condition: z.enum(['new', 'like-new', 'good', 'fair', 'poor'], {
+    message: 'Condition is required',
+  }),
+  description: z.string().optional(),
+})
+
 // WEBPAGE
 export const WebPageInputSchema = z.object({
   title: z.string().min(3, 'Title must be at least 3 characters'),
